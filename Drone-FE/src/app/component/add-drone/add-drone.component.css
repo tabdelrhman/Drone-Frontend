@@ -1,0 +1,9 @@
+.message{
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+.failed{
+    background-color: red;
+    font-weight: bold;
+}

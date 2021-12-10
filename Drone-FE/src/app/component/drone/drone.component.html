@@ -1,0 +1,56 @@
+<div class="jumbotron hero-spacer col-lg-8">
+    <h1> Drones world!</h1>
+    <p>Welcome to Drone application. Please select one of below drones by clicking on specific ID to start Loading
+        process.</p>
+    <!--<button style="float: left;padding: 5px;" type="submit" (click)="getAllDrones()" 
+    class="btn btn-primary">Refersh below table!</button> -->
+
+    <a (click)="getAllDrones()"><span class="glyphicon glyphicon-refresh"></span></a>
+
+    <button style="float: right;" type="submit" (click)="getAllAvailableDrones()" 
+    class="btn btn-primary">Available only</button>
+
+    <hr style="border: 2px solid rgb(32, 31, 31);" />
+    <table class="table">
+        <thead>
+            <tr style="font-weight: bold;">
+                <td>ID</td>
+                <td>Serial Number</td>
+                <td>Model</td>
+                <td>Battery Capacity</td>
+                <td>Weight Limit</td>
+                <td>State</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let drone of drones">
+                <td><a (click)="loadDrone(drone.droneId,drone.state)">{{drone.droneId}}</a></td>
+                <td>{{drone.serialNumber}}</td>
+                <td>{{drone.model}}</td>
+                <td>{{drone.batteryCapacity}}%</td>
+                <td>{{drone.weightLimit}}</td>
+                <td>{{drone.state}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div class="row" *ngIf="drones?.length === 0">
+        <p style="font-weight: bold; color: rgb(168, 15, 15); text-align: center;">No Drones available!</p>
+    </div>
+
+</div>
+
+<div class="hero-spacer-small col-lg-4">
+    <img src="assets/photos/drone.png" height="400" width="400">
+</div>
+
+<div class="droneLoad col-lg-12" [style.display]="IsVisible ? 'block' : 'none'">
+    <p class="col-lg-6" style="float: left;padding-top: 10px; font-weight: bold;">{{message}}</p>
+    <div class="col-lg-6" style="text-align: right;padding-top: 5px;">
+
+        <input type="button" class="btn btn-default" (click)="updateDroneState('loaded')" value="loaded">
+        <input type="button" class="btn btn-default" (click)="updateDroneState('delivered')" value="delivered">
+        <input type="button" class="btn btn-default" (click)="updateDroneState('returning')" value="returning">
+        <input type="button" class="btn btn-default" (click)="updateDroneState('idle')" value="idle">
+    </div>
+</div>
